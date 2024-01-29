@@ -14,6 +14,14 @@ end
 -- Forum: https://www.reddit.com/r/lunarvim/
 -- Discord: https://discord.com/invite/Xb9B4Ny
 lvim.colorscheme = 'tokyonight-night'
+-- lvim.colorscheme = 'flesh-and-blood'
+
+local null_ls = require('null-ls')
+lvim.lsp.null_ls.setup = {
+  sources = {
+    null_ls.builtins.diagnostics.eslint
+  }
+}
 
 lvim.lazy.opts.dev = {
   path = '~/projects/lua/nvim',
@@ -22,7 +30,7 @@ lvim.lazy.opts.dev = {
 lvim.builtin.indentlines.options.show_trailing_blankline_indent = true
 
 vim.opt.foldmethod = 'expr'
-vim.opt.foldlevel = 6
+vim.opt.foldlevel = 10
 vim.cmd'set foldexpr=nvim_treesitter#foldexpr()'
 
 vim.opt.relativenumber = true
@@ -44,6 +52,7 @@ if vim.g.neovide then
   vim.g.neovide_fullscreen = false
   vim.g.neovide_confirm_quit = true
   vim.g.neovide_cursor_vfx_mode = "railgun"
+  vim.g.neovide_transparency = 0.8
   vim.o.guifont = "FiraCode Nerd Font"
 end
 
