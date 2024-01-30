@@ -29,9 +29,19 @@ lvim.lazy.opts.dev = {
 }
 lvim.builtin.indentlines.options.show_trailing_blankline_indent = true
 
-vim.opt.foldmethod = 'expr'
 vim.opt.foldlevel = 10
-vim.cmd'set foldexpr=nvim_treesitter#foldexpr()'
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+
+vim.api.nvim_create_autocmd('BufEnter', {
+  callback = function ()
+    if vim.opt.foldmethod:get() == 'expr' then
+      vim.schedule(function ()
+        vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+      end)
+    end
+  end
+})
 
 vim.opt.relativenumber = true
 
